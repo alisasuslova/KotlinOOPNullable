@@ -96,8 +96,8 @@ class AudioAttachment(val audio: Audio) : Attachment {
 class FileAttachment(val file: File) : Attachment {
     override val type = "File"
 }
-class GiftAttachment(val file: File) : Attachment {
-    override val type = "File"
+class GiftAttachment(val gift: Gift) : Attachment {
+    override val type = "Gift"
 }
 
 
