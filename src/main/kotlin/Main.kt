@@ -14,7 +14,8 @@ data class Post(
     var fieldName: String?,
     var fieldTypeDescription: String,
     var fieldType: String = "",
-    var likes: Likes = Likes()
+    var likes: Likes = Likes(),
+    var attachment: Array<Attachment>? = emptyArray()
 )
 
 object WallService {
@@ -60,7 +61,7 @@ data class Video(
     var id: Int,
     var owner_id : Int,
     var title : String,
-    var duration : String
+    var duration : Int
 )
 
 data class Audio(
@@ -152,6 +153,26 @@ fun main() {
         )
     )
     WallService.printPosts()
-}
 
+    WallService.add(
+        Post(
+            postId = 4,
+            page = 1,
+            listOnTheLeft = "Документация",
+            fieldId = 1,
+            fieldName = null,
+            fieldTypeDescription = "Фото",
+            attachment = arrayOf(
+                PhotoAttachment(Photo(0, 555, "url_1","url_1")),
+                VideoAttachment(Video(1, 9847, "Просто видео",60)),
+                AudioAttachment(Audio(10, 1047, "Аудиозапись", "Happy new year")),
+                FileAttachment(File(207, 6584, "Текстовый документ", 217)),
+                GiftAttachment(Gift(2000, "url_1", "url_2", "url_3"))
+                )
+        )
+    )
+
+
+    WallService.printPosts()
+}
 
