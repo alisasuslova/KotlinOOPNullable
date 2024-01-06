@@ -45,6 +45,61 @@ object WallService {
     }
 }
 
+interface Attachment {
+    val type : String
+}
+
+data class Photo(
+    var id: Int,
+    var owner_id : Int,
+    var photo_130 : String,
+    var photo_604 : String
+)
+
+data class Video(
+    var id: Int,
+    var owner_id : Int,
+    var title : String,
+    var duration : String
+)
+
+data class Audio(
+    var id: Int,
+    var owner_id : Int,
+    var artist : String,
+    var title : String
+)
+
+data class File(
+    var id: Int,
+    var owner_id : Int,
+    var title : String,
+    var size : Int
+)
+
+data class Gift(
+    var id: Int,
+    var thumb_256 : String,
+    var thumb_96 : String,
+    var thumb_48 : String
+)
+
+class PhotoAttachment(val photo : Photo) : Attachment {
+    override val type = "Photo"
+}
+class VideoAttachment(val video: Video) : Attachment {
+    override val type = "Video"
+}
+class AudioAttachment(val audio: Audio) : Attachment {
+    override val type = "Audio"
+}
+class FileAttachment(val file: File) : Attachment {
+    override val type = "File"
+}
+class GiftAttachment(val file: File) : Attachment {
+    override val type = "File"
+}
+
 
 fun main() {
 
