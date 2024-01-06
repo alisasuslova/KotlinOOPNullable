@@ -14,7 +14,8 @@ data class Post(
     var fieldName: String?,
     var fieldTypeDescription: String,
     var fieldType: String = "",
-    var likes: Likes = Likes()
+    var likes: Likes = Likes(),
+    var attachment: Array<Attachment>? = emptyArray()
 )
 
 object WallService {
@@ -43,6 +44,61 @@ object WallService {
         }
         println()
     }
+}
+
+interface Attachment {
+    val type : String
+}
+
+data class Photo(
+    var id: Int,
+    var owner_id : Int,
+    var photo_130 : String,
+    var photo_604 : String
+)
+
+data class Video(
+    var id: Int,
+    var owner_id : Int,
+    var title : String,
+    var duration : Int
+)
+
+data class Audio(
+    var id: Int,
+    var owner_id : Int,
+    var artist : String,
+    var title : String
+)
+
+data class File(
+    var id: Int,
+    var owner_id : Int,
+    var title : String,
+    var size : Int
+)
+
+data class Gift(
+    var id: Int,
+    var thumb_256 : String,
+    var thumb_96 : String,
+    var thumb_48 : String
+)
+
+class PhotoAttachment(val photo : Photo) : Attachment {
+    override val type = "Photo"
+}
+class VideoAttachment(val video: Video) : Attachment {
+    override val type = "Video"
+}
+class AudioAttachment(val audio: Audio) : Attachment {
+    override val type = "Audio"
+}
+class FileAttachment(val file: File) : Attachment {
+    override val type = "File"
+}
+class GiftAttachment(val gift: Gift) : Attachment {
+    override val type = "Gift"
 }
 
 
@@ -97,6 +153,26 @@ fun main() {
         )
     )
     WallService.printPosts()
-}
 
+    WallService.add(
+        Post(
+            postId = 4,
+            page = 1,
+            listOnTheLeft = "Документация",
+            fieldId = 1,
+            fieldName = null,
+            fieldTypeDescription = "Фото",
+            attachment = arrayOf(
+                PhotoAttachment(Photo(0, 555, "url_1","url_1")),
+                VideoAttachment(Video(1, 9847, "Просто видео",60)),
+                AudioAttachment(Audio(10, 1047, "Аудиозапись", "Happy new year")),
+                FileAttachment(File(207, 6584, "Текстовый документ", 217)),
+                GiftAttachment(Gift(2000, "url_1", "url_2", "url_3"))
+                )
+        )
+    )
+
+
+    WallService.printPosts()
+}
 
