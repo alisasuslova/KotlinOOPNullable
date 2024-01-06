@@ -11,7 +11,7 @@ data class Post(
     var nameFieldOfTheList: String = "Запись на стене",
     var descriptionFieldOfTheList: String = "Объект, описывающий запись на стене пользователя или сообщества, содержит следующие поля:",
     var fieldId: Int, //id самой табличной записи, не поста
-    var fieldName: String,
+    var fieldName: String?,
     var fieldTypeDescription: String,
     var fieldType: String = "",
     var likes: Likes = Likes()
@@ -86,6 +86,17 @@ fun main() {
 
     WallService.printPosts()
 
+    WallService.add(
+        Post(
+            postId = 3,
+            page = 1,
+            listOnTheLeft = "Документация",
+            fieldId = 1,
+            fieldName = null,
+            fieldTypeDescription = "Текст записи."
+        )
+    )
+    WallService.printPosts()
 }
 
 
