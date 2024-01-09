@@ -3,10 +3,16 @@ package ru.netology
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 
 class WallServiceTest {
 
-    /*@Test
+    @Before
+    fun clearBeforeTest() {
+        WallService.clear()
+    }
+
+    @Test
     fun add() {
 
         val result = WallService.add(
@@ -21,7 +27,7 @@ class WallServiceTest {
             )
         )
 
-        assertEquals(2, result.postId)
+        assertEquals(1, result.postId)
     }
 
     @Test
@@ -50,7 +56,8 @@ class WallServiceTest {
             )
         )
 
-        assertEquals(true, result)
+        //assertEquals(true, result)
+        assertTrue(result)
     }
 
     @Test
@@ -67,70 +74,8 @@ class WallServiceTest {
                 likes = Likes(10)
             )
         )
-        assertEquals(false, result)
-    }*/
-
-    @Test
-    fun add() {
-
-        val result = WallService.add(
-            Post(
-                postId = 0,
-                page = 1,
-                listOnTheLeft = "Документация",
-                fieldId = 0,
-                fieldName = null,
-                fieldTypeDescription = "Идентификатор записи.",
-                likes = Likes(10)
-            )
-        )
-
-        assertEquals(2, result.postId)
+        //assertEquals(false, result)
+        assertFalse(result)
     }
 
-    @Test
-    fun ubdateTrue() {
-
-        val firstPost = WallService.add(
-            Post(
-                postId = 0,
-                page = 1,
-                listOnTheLeft = "Документация",
-                fieldId = 0,
-                fieldName = null,
-                fieldTypeDescription = "Идентификатор записи.",
-                likes = Likes(10)
-            )
-        )
-
-        val result = WallService.ubdate(
-            Post(
-                postId = 1,
-                page = 1,
-                listOnTheLeft = "Документация",
-                fieldId = 1,
-                fieldName = null,
-                fieldTypeDescription = "Текст записи."
-            )
-        )
-
-        assertEquals(true, result)
-    }
-
-    @Test
-    fun ubdateFalse() {
-
-        val result = WallService.ubdate(
-            Post(
-                postId = 100,
-                page = 1,
-                listOnTheLeft = "Документация",
-                fieldId = 0,
-                fieldName = null,
-                fieldTypeDescription = "NEW",
-                likes = Likes(10)
-            )
-        )
-        assertEquals(false, result)
-    }
 }
